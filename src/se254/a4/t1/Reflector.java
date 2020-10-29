@@ -21,13 +21,29 @@ import java.util.Scanner;
 public class Reflector {
 
     private Class<?> _inputClass;
+    private Object _object;
+    private Map<Integer, Method> map = new HashMap<Integer, Method>(); // map each method to a number for the
+                                                                       // user to select
 
     /**
      * Creates a Reflector instance with a class for reflection
+     * 
      * @param inputClass the class for reflection
      */
     public Reflector(Class<?> inputClass) {
         _inputClass = inputClass;
+        // create an instance of the input class
+        try {
+            _object = _inputClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException e) {
+            System.out.println("Error: Could not instantiate the class");
+        } catch (IllegalAccessException e) {
+            System.out.println("Error: Could not access the class");
+        } catch (InvocationTargetException e) {
+            System.out.println("Error: Could not construct object");
+        } catch (NoSuchMethodException e) {
+            System.out.println("Error: Could not construct object");
+        }
     }
 
     /**
@@ -36,46 +52,64 @@ public class Reflector {
      */
     public void reflect() {
         int num = -1; // variable to track the user input
-        Map<Integer, Method> map = new HashMap<Integer, Method>(); // map each method to a number for the
-                                                                   // user to select
 
-        try {
-            // create an instance of the input class
-            Object object = _inputClass.getDeclaredConstructor().newInstance();
-            System.out.println("--------------------------------------------------------------------------------------------------------------");
-            // check if user has pressed 0 to quit
-            while (num != 0) {
-                int count = 1;
+        System.out.println(
+                "==============================================================================================================");
+        // check if user has pressed 0 to quit
+        while (num != 0) {
 
-                // list the fields and methods of the class, where each method has a number
-                // corresponding to it
-                for (Field f : _inputClass.getFields()) {
-                    System.out.println("Field name = " + f.getName() + ", Field value = " + f.get(object));
-                }
-                
-                // assuming only methods declared in the class are listed
-                for (Method m : _inputClass.getDeclaredMethods()) {
-                    if (m.getParameterTypes().length == 0) {
-                        map.put(count, m);
-                        System.out.println(count + ". Method = " + m);
-                        count++;
-                    }
-                }
-            
-                Scanner sc = new Scanner(System.in);
-                // get user input
-                System.out.print("Enter the number corresponding to the method you want to execute. Enter 0 to quit: ");
-                num = sc.nextInt();
-                System.out.println("--------------------------------------------------------------------------------------------------------------");
-                // invoke the method on the object
-                if (num == 0) {
-                    break;
-                }
-                map.get(num).invoke(object);
+            try {
+                printFields();
+            } catch (IllegalAccessException e) {
+                System.out.println("Error: Could not access the fields");
             }
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException
-                | NoSuchMethodException e1) {
-            e1.printStackTrace();
+
+            printMethods();
+
+            Scanner sc = new Scanner(System.in);
+            // get user input
+            System.out.print("Enter the number corresponding to the method you want to execute. Enter 0 to quit: ");
+            num = sc.nextInt();
+            System.out.println(
+                "==============================================================================================================");
+           
+            if (num == 0) {
+                break;
+            }
+            
+            try {
+                map.get(num).invoke(_object);
+            } catch (IllegalAccessException e) {
+                System.out.println("Error: Could not access the method");
+            }  catch (InvocationTargetException e) {
+                System.out.println("Error: Could not invoke the method");
+            }
         }
     }
+
+    public void printFields() throws IllegalArgumentException, IllegalAccessException {
+        // list the fields and methods of the class, where each method has a number
+        // corresponding to it
+        for (Field f : _inputClass.getFields()) {
+            System.out.println("Field name = " + f.getName() + ", Field value = " + f.get(_object));
+        }
+    }
+
+    public void printMethods() {
+        int count = 1;
+       
+        for (Method m : _inputClass.getDeclaredMethods()) {
+            if (m.getParameterTypes().length == 0 && m.getModifiers() == Modifier.PUBLIC) {
+                map.put(count, m);
+                System.out.println(count + ". Method = " + m);
+                count++;
+            }
+        }
+    }
+
+    public void invokeMethod(int num)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        map.get(num).invoke(_object);
+    }
+
 }

@@ -36,8 +36,7 @@ public class T1Main {
 			Reflector reflector = new Reflector(inputClass);
 			reflector.reflect();
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error: invalid class entered");
-			e.printStackTrace();
+			System.out.println("Error: Invalid class entered");
 		}
 	}
 }
