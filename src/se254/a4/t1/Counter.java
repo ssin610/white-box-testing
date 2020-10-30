@@ -4,7 +4,7 @@ package se254.a4.t1;
 public class Counter {
 	public int _ctr;
 	public int _multiplier;
-
+	
 	//method increments _ctr	
 	public void increment() { 
 		_ctr--; //faulty increment		
