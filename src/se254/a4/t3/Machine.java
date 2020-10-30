@@ -16,8 +16,17 @@ package se254.a4.t3;
  */
 public abstract class Machine {
 
+    /**
+	 * This method gets the capability of a machine
+	 * @return the capability
+	 */
     public abstract int getCapability();
 
+    /**
+	 * This method gets the cost per unit of electricity
+     * of the machine
+	 * @return the cost
+	 */
     public abstract double costPerUnitElectricity();
 
 }

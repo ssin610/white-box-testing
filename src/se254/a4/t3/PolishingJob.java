@@ -14,6 +14,13 @@ package se254.a4.t3;
  */
 
 public class PolishingJob extends Job{
+
+	/**
+	 * This method calls the getRent method of the superclass
+	 * to calculate the rent for the polisher and floor
+	 * @param floor the floor the machine is operating on
+	 * @param polisher the polisher machine
+	 */
 	double polishingRent(Floor floor, PolishingMachine polisher) {
 		return getRent(floor, polisher);
 	}

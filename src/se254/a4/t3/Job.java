@@ -21,6 +21,13 @@ package se254.a4.t3;
  */
 public abstract class Job {
 
+	/**
+	 * This method gets floor and machine as parameters and calculates
+	 * the rent of the machine on the floor
+	 * @param floor the floor the machine is operating on
+	 * @param machine the machine
+	 * @return the rent cost
+	 */
     public double getRent(Floor floor, Machine machine) {
 		double electricityPerUnitArea = floor.getCondition() * machine.getCapability();
 		double energyConsumption = electricityPerUnitArea * floor.getArea();

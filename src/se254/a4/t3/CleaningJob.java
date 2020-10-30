@@ -14,6 +14,7 @@ package se254.a4.t3;
  */
 
 public class CleaningJob extends Job {
+	
 	// The method inputs the floor and cleaner objects and
     // calculates the energy consumption cost for cleaning the floor area
 	double cleaningRent(Floor floor, CleaningMachine cleaner) {
