@@ -1,19 +1,19 @@
 package se254.a4.t3;
 
 /**
- * [ADD COMMENTS] Describe the class
+ * This class represents a cleaning machine and has methods to give
+ * the capability of the cleaning machine as well as the machine's
+ * cost per unit of electricity
  * 
- * @author Author Name: [YOUR NAME] Author UPI: [YOUR UPI]
- * @version Date: [CURRENT DATE] 
+ * @author Author Name: Saurabh Singh, Author UPI: ssin610
+ * @version Date: 28/10/2020
  *
- * [Explain the changes made and their rationale. 
- * This description may overlap with the contents of commit messages]
+ * This class extends the Machine class in order to reduce code
+ * duplication through the Job class.
  * 
- * Note: You may create new classes, methods or fields in this package
- *
  */
 
-public class CleaningMachine {
+public class CleaningMachine extends Machine {
 
 	public int getCapability() {
 		// capability defines the efficiency of cleaner

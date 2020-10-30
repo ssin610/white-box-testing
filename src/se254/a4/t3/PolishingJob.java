@@ -1,23 +1,27 @@
 package se254.a4.t3;
 
 /**
- * [ADD COMMENTS] Describe the class
+ * This class represents a polishing job
  * 
- * @author Author Name: [YOUR NAME] Author UPI: [YOUR UPI]
- * @version Date: [CURRENT DATE] 
+ * @author Author Name: Saurabh Singh, Author UPI: ssin610
+ * @version Date: 28/10/2020 
  * 
- * [Explain the changes made and their rationale. 
- * This description may overlap with the contents of commit messages]
- * 
- * Note: You may create new classes, methods or fields in this package
+ * The polishingRent method now calls the parent getRent method.
+ * This fixes the previous code duplication present in this class and
+ * in CleaningJob, as now the duplicated code is in a single method
+ * getRent in the parent class Job
  *
  */
 
-public class PolishingJob{
+public class PolishingJob extends Job{
+
+	/**
+	 * This method calls the getRent method of the superclass
+	 * to calculate the rent for the polisher and floor
+	 * @param floor the floor the machine is operating on
+	 * @param polisher the polisher machine
+	 */
 	double polishingRent(Floor floor, PolishingMachine polisher) {
-		double floorArea = floor.length() * floor.width();
-		double electricityPerUnitArea = floor.getCondition() * polisher.getCapability();
-		double energyConsumption = electricityPerUnitArea * floorArea;
-		return energyConsumption * polisher.costPerUnitElectricity();
+		return getRent(floor, polisher);
 	}
 }

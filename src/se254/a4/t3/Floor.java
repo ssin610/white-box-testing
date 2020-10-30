@@ -1,16 +1,19 @@
 package se254.a4.t3;
 
 /**
- * [ADD COMMENTS] Describe the class
+ * This class represents a floor and has methods to return different
+ * properties of the floor i.e its length, width, condition, and area
  * 
- * @author Author Name: [YOUR NAME] Author UPI: [YOUR UPI]
- * @version Date: [CURRENT DATE] 
+ * @author Author Name: Saurabh Singh, Author UPI: ssin610
+ * @version Date: 28/10/2020 
  *
- * [Explain the changes made and their rationale. 
- * This description may overlap with the contents of commit messages]
+ * The method getArea has been added to fix the code smell of feature envy. Previously,
+ * Cleaningjob and PolishingJob were using the length and width of a Floor object when
+ * calculating the floor area, rather than having the Floor object calculate and return
+ * the area. These other classes using the length and width methods of the Floor class 
+ * to perform calculations is feature envy, and now allowing the Floor object to perform
+ * the area calculation means this feature envy is no longer present.
  * 
- * Note: You may create new classes, methods or fields in this package
- *
  */
 
 public class Floor {
@@ -30,4 +33,8 @@ public class Floor {
 		return 5;
 	}
 
+	public int getArea() {
+		// calculate and return the area of the floor
+		return length() * width();
+	}
 }
