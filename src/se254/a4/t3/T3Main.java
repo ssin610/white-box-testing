@@ -6,8 +6,8 @@ package se254.a4.t3;
  * The refactorings performed must not change the output of the main method. 
  * This can happen due to incorrect refactorings.
  * 
- * @author Author Name: [YOUR NAME] Author UPI: [YOUR UPI]
- * @version Date: [CURRENT DATE] 
+ * @author Author Name: Saurabh Singh, Author UPI: ssin610
+ * @version Date: 28/10/2020
  * 
  * You MUST NOT change this code.
  * 
